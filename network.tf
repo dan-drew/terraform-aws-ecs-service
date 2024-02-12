@@ -44,7 +44,7 @@ locals {
           vpc            = data.aws_vpc.lb_vpc[lb.name]
           container_name = port.container_name
         }
-      ) if lb.ports == null || contains(lb.ports, p)
+      ) if try(contains(lb.ports, p), true)
     }
   ]...) : {}
 }
